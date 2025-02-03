@@ -1,22 +1,12 @@
 const catchAsync = require('../utils/catchAsync');
 const Category = require('../models/categoryModel');
 const AppError = require('../utils/AppError');
-exports.getAll = catchAsync(async (req, res, next) => {
-  const categoryList = await Category.find()
-  res.status(200).json({
-    status: 'success',
-    data: {
-      categoryList,
-    },
-  });
-});
+const factory = require('./handlerFactory')
 
-exports.create = catchAsync(async (req, res, next) => {
-  const newCategory = await Category.create(req.body)
-  res.status(200).json({
-    status: 'success',
-    data: {
-      newCategory,
-    },
-  });
-});
+exports.getAll = factory.getAll(Category)
+exports.getOne = factory.getOne(Category)
+exports.create = factory.create(Category)
+exports.update = factory.update(Category)
+exports.delete = factory.delete(Category)
+
+

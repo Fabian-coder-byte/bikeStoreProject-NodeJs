@@ -8,6 +8,11 @@ var brandRouter = require('./routes/brandRouters');
 var categoryRouter = require('./routes/categoryRouter');
 var productRouter = require('./routes/productRouter');
 var authRouter = require('./routes/authRouter');
+var storeRouter = require('./routes/storeRouter');
+var staffRouter = require('./routes/staffRouter');
+var stockRouter = require('./routes/stockRouter');
+var orderRouter = require('./routes/orderRouter');
+var userRouter = require('./routes/userRouter');
 
 var app = express();
 
@@ -21,10 +26,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/bikestore/brands', brandRouter);
-app.use('/bikestore/category', categoryRouter);
-app.use('/bikestore/products', productRouter);
-app.use('/bikestore/auth', authRouter);
+app.use('/api/v1/brands', brandRouter);
+app.use('/api/v1/category', categoryRouter);
+app.use('/api/v1/products', productRouter);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/stores', storeRouter);
+app.use('/api/v1/staffs', staffRouter);
+app.use('/api/v1/stock', stockRouter);
+app.use('/api/v1/order', orderRouter);
+app.use('/api/v1/users', userRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

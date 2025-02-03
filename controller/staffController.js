@@ -1,0 +1,9 @@
+const catchAsync = require('../utils/catchAsync');
+const Staff = require('../models/staffModel');
+const AppError = require('../utils/AppError');
+const factory = require('./handlerFactory')
+exports.getAll = factory.getAll(Staff)
+exports.getOne = factory.getOne(Staff)
+exports.update = factory.update(Staff)
+exports.create = factory.create(Staff)
+exports.delete = factory.delete(Staff)

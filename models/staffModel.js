@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const brandSchema = new mongoose.Schema({
+const staffSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'A name must have a name'],
@@ -26,11 +26,12 @@ const brandSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Staff'
   },
+  store: { type: mongoose.Schema.Types.ObjectId, ref: 'Store' }, // Relazione con il modello Store
   createdAt: {
     type: Date,
     default: Date.now(),
     select: false,
   },
 })
-const Brand = mongoose.model('Brand', brandSchema)
-module.exports = Brand
+const Staff = mongoose.model('Staff', staffSchema)
+module.exports = Staff

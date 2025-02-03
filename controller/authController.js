@@ -7,6 +7,17 @@ const signToken = id => {
     expiresIn: process.env.JWT_EXPIRES_IN
   });
 }
+
+const createSendToken = async function (user, statusCode, res) {
+  const token = signToken(user._id)
+  res.status(statusCode).json({
+    status: "success",
+    token,
+    data: {
+      user
+    }
+  })
+}
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     name: req.body.name,
@@ -24,3 +35,17 @@ exports.signup = catchAsync(async (req, res, next) => {
     message: 'User signed up successfully',
   });
 });
+
+exports.logIn = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body
+  if (!email || !password) {
+    return next(new AppError("Email o Password errati", 500))
+  }
+
+  const user = await User.findOne({ email }).select('+password');
+
+  if (!user || (!await user.checkPassword(password, user.password))) {
+    return next(new AppError("Dati non validi", 500))
+  }
+  createSendToken(user, 200, res)
+})

@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const orderSchema = new mongoose.Schema({
   customer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Customer',
+    ref: 'User',
     required: [true, 'An order must have a customer'],
   },
   status: {
@@ -34,3 +34,4 @@ const orderSchema = new mongoose.Schema({
 })
 const Order = mongoose.model('Order', orderSchema)
 module.exports = Order
+
