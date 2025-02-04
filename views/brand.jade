@@ -3,9 +3,66 @@ extends layout
 block content
   .row 
     .col-lg-12 
-      ul 
-        each el in data
-          li= el.name
-        
-      
- 
+      .card.shadow.mb-4
+        .card-header 
+          h3 Titel
+        .card-body
+          .table-responsive
+            #dataTable_wrapper.dataTables_wrapper.dt-bootstrap4
+              .row
+                .col-sm-12.col-md-6
+                  #dataTable_length.dataTables_length
+                    label
+                      | Show 
+                      select.custom-select.custom-select-sm.form-control.form-control-sm(name="dataTable_length" aria-controls="dataTable")
+                        option(value="10") 10
+                        option(value="25") 25
+                        option(value="50") 50
+                        option(value="100") 100
+                      | entries
+                .col-sm-12.col-md-6
+                  #dataTable_filter.dataTables_filter
+                    label
+                      | Search:
+                      input.form-control.form-control-sm(type="search" placeholder="" aria-controls="dataTable")
+
+              .row
+                .col-sm-12
+                  table.table.table-bordered.dataTable#dataTable(width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info")
+                    thead
+                      tr(role="row")
+                        th.sorting.sorting_asc(tabindex="0" aria-controls="dataTable" aria-sort="ascending") Name
+                        th.sorting(tabindex="0" aria-controls="dataTable") Description
+                    tfoot
+                      tr
+                        th Name
+                        th Description
+                    tbody
+                      each el, index in data
+                        tr(class=(index % 2 === 0 ? 'odd' : 'even'))
+                          td.sorting_1= el.name
+                          td= el.description
+              .row
+                .col-sm-12.col-md-5
+                  #dataTable_info.dataTables_info(role="status" aria-live="polite") Showing 1 to 10 of 57 entries
+                .col-sm-12.col-md-7
+                  #dataTable_paginate.dataTables_paginate.paging_simple_numbers
+                    ul.pagination
+                      li.paginate_button.page-item.previous.disabled#dataTable_previous
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0") Previous
+                      li.paginate_button.page-item.active
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0") 1
+                      li.paginate_button.page-item
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0") 2
+                      li.paginate_button.page-item
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0") 3
+                      li.paginate_button.page-item
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0") 4
+                      li.paginate_button.page-item
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0") 5
+                      li.paginate_button.page-item
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0") 6
+                      li.paginate_button.page-item.next#dataTable_next
+                        a.page-link(href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0") Next
+
+
